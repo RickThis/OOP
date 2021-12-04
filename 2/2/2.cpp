@@ -1,6 +1,7 @@
 ﻿// 2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 #include <iostream>
-#include <ostream>
+#include <fstream>
+#include <istream>
 
 using namespace std;
 
@@ -10,6 +11,16 @@ class Prop {
 	int sq;
 	int amount;
 public:
+	friend ostream& operator << (ostream& os, const Prop& p)
+	{
+		return os << p.name << " " << p.kindof
+			<< " " << p.sq << " " << p.amount << endl;
+	}
+	friend istream& operator >> (istream& os, Prop& p)
+	{
+		os >> p.name >> p.kindof >> p.sq >> p.amount;
+		return os;
+	}
 	string get_name() {
 		return this->name;
 	};
@@ -59,9 +70,11 @@ public:
 			return false;
 		}
 	}
+	
 
 
 };
+
 void Prop::set(string n, string k, int s, int a) {
 	this->name = n;
 	this->kindof = k;
@@ -79,15 +92,7 @@ void Prop::show() {
 int main()
 {
 	Prop a;
-	Prop b;
-	
-	
-	if (a == b) {
-		cout << "yes";
-	}
-	else {
-		cout << "Fuck no!";
-	}
+	cin >> a;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
