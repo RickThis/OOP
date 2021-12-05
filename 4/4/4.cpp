@@ -3,6 +3,9 @@
 
 
 #include <iostream>
+#include <iomanip>
+#include <conio.h>
+#include <stdio.h>
 using namespace std;
 
 class household {
@@ -10,17 +13,16 @@ class household {
 	string  school;
 	unsigned int count;
 	unsigned short square;
+	bool printed = false;
 	friend ostream& operator<<(ostream& stream, household& o1);
-	friend istream& operator>>(istream& stream, household& o1);
 	friend void shapka(void);
 	friend void linebuild(void);
 public:
 	household() { count = 0; square = 0; }
-	household(string a, string b, unsigned int& c, float& d);
-	void set(string a, string, unsigned int, float);
-	void get(string a, string& b, unsigned int& c, float& d);
-	void show(void);
-	string  ret_name() { return name;}
+	household(string , string , unsigned int& c, float& d);
+	void set(string , string, unsigned int, float);
+	void get(string& a, string& b, unsigned int& c, float& d);
+	string ret_name() { return name;}
 };
 
 household::household(string a, string b, unsigned int& c, float& d) {
@@ -31,6 +33,7 @@ household::household(string a, string b, unsigned int& c, float& d) {
 }
 
 class DB {
+public:
 	string title;
 	household* rows[12];
 	int col;
@@ -49,7 +52,30 @@ class DB {
 	void del_rec();
 	void sort_DB();
 };
+void shapka(void)
+{
+	cout << "_______________________________________________________________\n";
+	cout << "|         Буддистские монастыри Японии периода Нара           |\n";
+	cout << "|-------------------------------------------------------------|\n";
+	cout << "|  Название  | Школа | Количество монахов | Площадь земли(га) |\n";
+	cout << "|-------------------------------------------------------------|\n";
+}
 
+
+void linebuild(void) {
+	cout << "\n|-------------------------------------------------------------|\n";
+}
+
+
+ostream& operator<<(ostream& stream, household& o1) {
+	
+	stream << "|" << setw(10) << o1.name << "  |  ";
+	stream << setw(5) << o1.school << "|";
+	stream << setw(18) << o1.count << "  |";
+	stream << setw(17) << o1.square << "  |";
+	linebuild();
+	return stream;
+}
 
 void DB::sort_DB() {
 	string s1;
@@ -76,14 +102,112 @@ void DB::del_rec() {
 	col--;
 }
 
+void household::set(string a, string b, unsigned int c, float d) {
+	name = a;
+	school = b;
+	count = c;
+	square = d;
+}
+
+void household::get(string& a, string& b, unsigned int& c, float& d)
+{
+	a = name;
+	b = school;
+	c = count;
+	d = square;
+}
+
 void DB::add_rec(string a, string b, unsigned int c, float d) {
 	if (col >= 12) return;
 	else col++;
 	rows[col - 1] = new household(a, b, c, d);
 	sorted = 0;
 }
-int main() {
+void clrscr()
+{
+	system("CLS");
+}
 
+
+ostream& operator<<(ostream& stream, DB& o1) {
+	stream << o1.title << endl;
+	if (o1.sorted == 0) stream << "Таблица не отсортирована.\n";
+	else stream << "Таблица отсортирована.\n";
+	shapka();
+	if (!o1.col) stream << "Таблица пуста.";
+	else {
+		for (int i = 0; i < o1.col; i++) {
+			stream << *o1.rows[i];
+		}
+	}
+	return stream;
+}
+
+int main() {
+	setlocale(LC_ALL, "rus");
+	string n;
+	string t;
+	unsigned int s;
+	float h;
+	short i;
+	short q, q1;
+	clrscr();
+	DB* tmp = new DB("\nБАЗА ДАННЫХ ╧1\n");
+
+	for (int a = 0; !a;) {
+		clrscr();
+		cout << "1. Добавить запись\n";
+		cout << "2. Удалить запись\n";
+		cout << "3. Сортировать базу\n";
+		cout << "4. Вывести базу\n";
+		cout << "5. Выход\n";
+		cout << "> ";
+		int p;
+		cin >> p;
+		switch (p) {
+		case 1: {
+			cout << "Наименование, Тип, Посевная площадь, Урожайность \n";
+
+			cin>>n;  
+			cin>>t;   
+			cin>>s;   
+			cin>>h;   
+			tmp->add_rec(n,t,s,h);
+			
+			tmp->add_rec("Тотайдзи", "Т", 220, 368.8);
+			tmp->add_rec("Якусидзи", "С", 50, 54.7);
+			tmp->add_rec("Дайандзи", "L", 10, 12.2);
+			break;
+		}
+
+		case 2: {
+			tmp->del_rec();
+			break;
+		}
+
+		case 3: {
+			tmp->sort_DB();
+			break;
+		}
+
+		case 4: {
+			cout << *tmp;
+			cout << "\nНажмите клавишу для продолжения...";
+			_getch();
+			break;
+		}
+
+		case 5: {
+			a = 1;
+			break;
+		}
+
+		default: {
+			cout << "Неверный вызов";
+			break;
+		}
+		}
+	}
 	return 0;
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
