@@ -2,10 +2,58 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <stdlib.h>
+#include <sstream>
+#include <cctype>
+
+using namespace std;
+
+
+class MyClass {
+	string str = "";
+
+	friend ifstream& operator >> (ifstream& s, int& obj)
+	{
+		s.read((char*)&obj, sizeof(int));
+		return s;
+	}
+	friend ofstream& operator << (ofstream& s, int& obj)
+	{
+		s.write((char*)&obj, sizeof(int));
+		return s;
+	}
+public:
+	void check();
+	MyClass(string a) {
+		this->str = a;
+		check();
+	}
+};
+
+
+void MyClass::check() {
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (!islower(str[i])) {
+			str.erase(str.find(str[i]));
+		}
+		for (int j = 0; j < 10; j++)
+		{
+			char number = (char)j;
+			if (str[i] == number) {
+				str.erase(str.find(number), 1);
+			}
+		}
+	}
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	setlocale(LC_ALL, "rus");
+	
+	
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
