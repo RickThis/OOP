@@ -181,11 +181,13 @@ namespace Course {
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
+			
 		}
 #pragma endregion
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
+	
 };
+public ref class Hello: MyForm{};
 }

@@ -43,3 +43,4 @@ System::Void Course::MyForm::MyForm_Load(System::Object^ sender, System::EventAr
 {
 	return System::Void();
 }
+

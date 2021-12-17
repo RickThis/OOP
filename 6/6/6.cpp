@@ -17,13 +17,14 @@ public:
     int throughput;
     int capacity;
 	friend ostream& operator <<(ostream& os, Airport& other);
+    void change(string &p, int &t, int &c) {
+        this->capacity = c;
+        this->place = p;
+        this->throughput = t;
+    }
 };
 
-void change(Airport& a, string p, int t, int c) {
-    a.capacity = c;
-    a.place = p;
-    a.throughput;
-}
+
 void clrscr() {
     system("CLS");
 }

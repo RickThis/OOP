@@ -30,10 +30,29 @@ public:
 
 int main()
 {
-	Data<float> a(10.0);
-	Data<float> b(30.0);
-	Data<float> c = b / a;
-	c.show();
+	setlocale(LC_ALL, "rus");
+	cout << "For integers: " << endl;
+	cout << "Enter first int: ";
+	int d_1;
+	cin >> d_1;
+	cout << "Enter second one: ";
+	int d_2;
+	cin >> d_2;
+	Data<int> a(d_1);
+	Data<int> b(d_2);
+	Data<int> c = b / a;
+	cout << b.get() << " / " << a.get() << " = " << c.get() << endl;
+	cout << "For floats: " << endl;
+	cout << "Enter first float: ";
+	float f_1;
+	cin >> f_1;
+	cout << "Enter second one: ";
+	float f_2;
+	cin >> f_2;
+	Data<float> a_1(f_1);
+	Data<float> b_1(f_2);
+	Data<float> c_1(b_1 / a_1);
+	cout << b_1.get() << " / " << a_1.get() << " = " << c_1.get() << endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

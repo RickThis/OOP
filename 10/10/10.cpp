@@ -1,69 +1,98 @@
-﻿// 7.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// 10.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <sstream>
-#include <cctype>
-
+#include <assert.h>
 using namespace std;
-
-
-class MyClass {
-	string str = "";
-
-	friend istream& operator >> (istream& s, fstream& obj)
-	{
-		s.read((char*)&obj, sizeof(int));
-		return s;
-	}
-	template<typename T>
-	friend ofstream& operator << (ofstream& f, T& A)
-	{
-		
-		return f;
-	}
+template<typename T>
+class Test {
+	int size = 20;
+	T* arr = new T[size];
 public:
-	void check();
-	MyClass(string a) {
-		this->str = a;
-		check();
+	
+	template <typename T>
+	T min() {
+		T min = arr[0];
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] < min) {
+				min = arr[i];
+			}
+		}
+		return min;
+	}
+	void fill();
+	void sort();
+	T sum();
+	void show();
+	void setSize(int s);
+	~Test(){
+		delete []arr;
 	}
 };
 
 
-void MyClass::check() {
-	for (int i = 0; i < str.length(); i++)
+template<typename T>
+void Test<T>::fill(){
+	for (size_t i = 0; i < size; i++)
 	{
-		if (!islower(str[i])) {
-			str.erase(str.find(str[i]));
-		}
-		for (int j = 0; j < 10; j++)
+		arr[i] = (rand() % 20)-10;
+	}
+}
+
+template<typename T>
+void Test<T>::sort()
+{
+	for (int j = 0; j < this->size-1; j++)
+	{
+		for (size_t i = 0; i < this->size - 1; i++)
 		{
-			char number = (char)j;
-			if (str[i] == number) {
-				str.erase(str.find(number), 1);
+			if (arr[i + 1] < arr[i]) {
+				T buff = arr[i + 1];
+				arr[i + 1] = arr[i];
+				arr[i] = buff;
 			}
 		}
 	}
+	
+	
+}
+
+template<typename T>
+T Test<T>::sum()
+{
+	T summa = 0;
+	for (size_t i = 0; i < size; i++)
+	{
+		if (arr[i] > 0) {
+			summa += arr[i];
+		}
+	}
+	return summa;
+}
+
+template<typename T>
+void Test<T>::show()
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		cout << arr[i] << " ";
+	}
+}
+
+template<typename T>
+void Test<T>::setSize(int s)
+{
+	this->size = s;
 }
 
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	fstream a;
-	try
-	{
-		a.open("floats.txt");
-		cout << a;
-	}
-	catch (const exception&ex)
-	{
-		cout << ex.what() << endl;
-	}
-	a.close();
+	string five = "-5";
+	string three = "3";
+	assert(five > three);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <stdlib.h>
 #include <conio.h>
 using namespace std;
 class ints{
