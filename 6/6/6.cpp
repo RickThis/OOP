@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <iomanip>
-
+#define N 7
 
 using namespace std;
 
@@ -22,15 +22,28 @@ public:
         this->place = p;
         this->throughput = t;
     }
+    Airport();
+    Airport(string p, int t, int c);
 };
 
+Airport::Airport(string p, int t, int c) {
+    this->place = p;
+    this->throughput = t;
+    this->capacity = c;
+}
+
+Airport::Airport() {
+    place = "";
+    throughput = 0;
+    capacity = 0;
+}
 
 void clrscr() {
     system("CLS");
 }
 
 
-Airport obj[7];
+Airport obj[N];
 
 
 ostream& operator << (ostream& os, Airport& other) {
@@ -55,24 +68,15 @@ void sort()
 void show()
 {
     int i, j;
-    cout << "                            ТЕЛЕФОН: \n";
+    cout << "                            Airport: \n";
     cout << "----------------------------------------------------------------\n";
-    cout << "        Capacity        Throughput               Place     \n";
+    cout << "      Capacity        Throughput       Place     \n";
     cout << "----------------------------------------------------------------\n";
 
-    char s[10];
-    for (i = 0; i < 7; i++) {
-        if (strlen(s) == 6) {
-            cout << ' ' << obj[i].capacity;
-        }
-        else if (strlen(s) == 7) {
-            cout << s[0] << s[1] << s[2] << "-" << s[3] << s[4] << "-" << s[5] << s[6];
-        }
-        cout << setw(15) << obj[i].capacity;
-        if (obj[i].throughput == 0) cout << setw(15) << "Нет";
-        else if (obj[i].throughput == 1) cout << setw(15) << "Да";
-        cout << setw(25) << obj[i].place;
-        cout << "\n";
+    string s = "";
+    for (size_t i = 0; i < N; i++)
+    {
+        cout << "\t" << obj[i].capacity << "\t\t" << obj[i].throughput << "\t\t" << obj[i].place << endl;
     }
 }
 
@@ -93,12 +97,14 @@ int main(void) {
         cin >> p;
         switch (p) {
         case 1: {
-            change(obj[0],"Sharimetevo", 123, 123);
-            change(obj[1], "Sharimetevo", 456779, 456779);
-            change(obj[2], "Sharimetevo", 12443, 12443);
-            change(obj[3], "Sharimetevo", 13, 13);
-            change(obj[4], "Sharimetevo", 1267853, 1267853);
-            change(obj[5], "Sharimetevo", 12113, 12113);
+            obj[0] = Airport("Sharimetevo", 123, 123);
+            obj[1] = Airport("KR", 456779, 456779);
+            obj[2] = Airport("Brovary", 12443, 12443);
+            obj[3] = Airport("OAE", 13, 13);
+            obj[4] = Airport("Dublin", 1267853, 1267853);
+            obj[5] = Airport("Kyiv", 12113, 12113);
+            obj[6] = Airport("Pulkovo", 12113, 12113);
+
             r = 1;
             break;
         }
