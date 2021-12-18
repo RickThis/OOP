@@ -85,7 +85,7 @@ int main()
 			system("CLS");
 			for (size_t i = 0; i < obj.size(); i++)
 			{
-				cout << i+1 << "\t" << "-------" << obj[i].get() << endl;
+				cout << i+1 << ")\t"<< obj[i].get() << endl;
 			}
 			_getch();
 			continue;
