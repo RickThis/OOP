@@ -6,64 +6,191 @@
 #include <stdlib.h>
 #include <sstream>
 #include <cctype>
+#include <conio.h>
+
 
 using namespace std;
 
 
 class MyClass {
 	string str = "";
-
-	friend istream& operator >> (istream& s, fstream& obj)
-	{
-		s.read((char*)&obj, sizeof(int));
-		return s;
-	}
-	template<typename T>
-	friend ofstream& operator << (ofstream& f, T& A)
-	{
-		
-		return f;
-	}
+	string path = "";
+	
 public:
+	
 	void check();
-	MyClass(string a) {
-		this->str = a;
-		check();
-	}
+	MyClass(string a, string p);
+	MyClass();
+	void setPath(string p);
+	void setStr(string s);
+	void showString();
+	void showPath();
+	bool is_empty();
+	friend ostream& operator<< (ostream& f, MyClass& other) {
+		try
+		{
+			ofstream obj;
+			obj.open(other.path);
+			other.check();
+			obj << other.str;
+			obj.close();
+		}
+		catch (const std::exception& ex)
+		{
+			cout << ex.what() << endl;
+		}
+
+		return f;
+	};
 };
 
+bool MyClass::is_empty() {
+	if (str.empty()) {
+		return true;
+	}
+	return false;
+}
+
+void MyClass::showPath() {
+	cout << this->path << endl;
+}
+
+void MyClass::showString() {
+	cout << this->str << endl;
+}
+
+
+void MyClass::setStr(string s) {
+	this->str = s;
+}
+
+
+MyClass::MyClass(string a, string p) {
+	this->str = a;
+	this->path = p;
+}
+
+MyClass::MyClass() {
+	this->str = "kldfRRRjkldsJF:sHfif14lHG5961JF12";
+	this->path = "floats.txt";
+}
+
+void MyClass::setPath(string p) {
+	this->path = p;
+}
 
 void MyClass::check() {
+	int *index = new int[100];
+	int last = 0;
+	int deleted = 0;
+	for (size_t i = 0; i < 100; i++)
+	{
+		index[i] = 0;
+	}
 	for (int i = 0; i < str.length(); i++)
 	{
-		if (!islower(str[i])) {
-			str.erase(str.find(str[i]));
-		}
-		for (int j = 0; j < 10; j++)
-		{
-			char number = (char)j;
-			if (str[i] == number) {
-				str.erase(str.find(number), 1);
-			}
+		if (isupper(str[i])) {
+			index[last] += i;
+			last++;
 		}
 	}
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (i >= last) break;
+		str.erase((index[i]-deleted), 1);
+		deleted++;
+	}
+	last = 0;
+	deleted = 0;
+	for (size_t i = 0; i < 100; i++)
+	{
+		index[i] = 0;
+	}
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (isdigit(str[i])) {
+			index[last] += i;
+			last++;
+		}
+	}
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (i >= last) break;
+		str.erase(index[i]-deleted, 1);
+		deleted++;
+	}
+	delete[]index;
 }
+
 
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	fstream a;
-	try
-	{
-		a.open("floats.txt");
-		cout << a;
+	MyClass a;
+	int check = 1;
+	while (check) {
+		system("CLS");
+		cout << "1. Show string" << endl
+			<< "2. Show path" << endl
+			<< "3. Set string" << endl
+			<< "4. Set path" << endl
+			<< "5. Write the string down into a txt file" << endl
+			<< "6. Exit" << endl;
+		;
+
+		int choose;
+		cin >> choose;
+		switch (choose)
+		{
+		case 1:
+		{
+			if (a.is_empty()) {
+				cout << "String is empty..." << endl;
+			}
+			else {
+				a.showString();
+			}
+			_getch();
+			continue;
+		}
+		case 2:
+		{
+			a.showPath();
+			_getch();
+			continue;
+
+		}
+		case 3:
+		{
+			cout << "Enter string: ";
+			string own;
+			cin >> own;
+			a.setStr(own);
+			continue;
+
+		}
+		case 4:
+		{
+			cout << "Enter path: ";
+			string ownpath;
+			cin >> ownpath;
+			a.setPath(ownpath);
+			continue;
+		}
+		case 5:
+		{
+			cout << a;
+			continue;
+		}
+		case 6:
+		{
+			check = 0;
+		}
+		default:
+			break;
+		}
 	}
-	catch (const exception&ex)
-	{
-		cout << ex.what() << endl;
-	}
-	a.close();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
