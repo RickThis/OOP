@@ -2,177 +2,194 @@
 //
 
 #include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <conio.h>
 #include <assert.h>
 using namespace std;
 template<typename T>
-class Test {
-	int size = 20;
-	T* arr = new T[size];
+class Sum {
+	vector<T> arr;
+	T res;
 public:
-	
-	template <typename T>
-	T min() {
-		T min = arr[0];
-		for (int i = 0; i < size; i++)
-		{
-			if (arr[i] < min) {
-				min = arr[i];
+	Sum() {
+		res = 0;
+	}
+	T sum() {
+		res = 0;
+		for (auto el : this->arr) {
+			if (el > 0) {
+				this->res += el;
 			}
 		}
-		return min;
+		return res;
 	}
-	void fill();
-	void sort();
-	T sum();
-	void show();
-	void setSize(int s);
-	~Test(){
-		delete []arr;
+	void push_back(T dat) {
+		this->arr.push_back(dat);
 	}
-	int len(){
-		return size;
+	void show() {
+		for (auto el : arr) {
+			cout << el << " ";
+		}
+		cout << endl;
 	}
-	T get(int index) { return arr[index]; };
 };
 
-
-template<typename T>
-void Test<T>::fill(){
-	if(sizeof(T)!=28){
-		for (size_t i = 0; i < size; i++)
-		{
-			arr[i] = ((rand() % 30) - 10) / 0.23;
-		}
-	}
-	else {
-		for (size_t i = 0; i < size; i++)
-		{
-			string a = "123";
-			int b = atoi(a.c_str())
-			arr[i] = b;
-		}
-	}
-	
+void query() {
+	cout << "1. push back" << endl
+		<< "2. show" << endl
+		<< "3. sum" << endl
+		<< "4. main menu" << endl;
 }
-
-template<typename T>
-void Test<T>::sort()
-{
-	for (int j = 0; j < this->size-1; j++)
-	{
-		for (size_t i = 0; i < this->size - 1; i++)
-		{
-			if (arr[i + 1] < arr[i]) {
-				T buff = arr[i + 1];
-				arr[i + 1] = arr[i];
-				arr[i] = buff;
-			}
-		}
-	}
-	
-	
-}
-
-template<typename T>
-T Test<T>::sum()
-{
-	T summa = 0;
-	for (size_t i = 0; i < size; i++)
-	{
-		if (arr[i] > 0) {
-			summa += arr[i];
-		}
-	}
-	return summa;
-}
-
-template<typename T>
-void Test<T>::show()
-{
-	for (size_t i = 0; i < size; i++)
-	{
-		cout << i << ") " << arr[i] << endl;
-	}
-}
-
-template<typename T>
-void Test<T>::setSize(int s)
-{
-	this->size = s;
-}
-
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	
+	bool check = true;
+	while (check) {
+		cout << "What type you wanna work with?" << endl;
+		cout << "1. int" << endl
+			<< "2. float" << endl
+			<< "3. double" << endl
+			<< "4. exit" << endl;
+		int choose;
+		cin >> choose;
+		switch (choose)
+		{
+		case 1: 
+		{
+			bool check = true;
+			Sum<int> arr;
+			while (check) {
+				query();
+				int choose1;
+				cin >> choose1;
+				switch (choose1)
+				{
+				case 1: {
+					cout << "Enter int you wanna push: ";
+					int it1;
+					cin >> it1;
+					arr.push_back(it1);
+					continue;
+				}
+				case 2:
+				{
+					arr.show();
+					continue;
+				}
+				case 3:
+				{
+					int wanted;
+					cout << "Enter waiting result: ";
+					cin >> wanted;
+					assert(wanted == arr.sum());
+					cout << "Res: " << arr.sum() << endl;
+					continue;
+				}
+				case 4:
+				{
+					check = false;
+				}
+				default:
+					break;
+				}
 
-	cout
-		<< "1. create array of ints" << endl
-		<< "2. create array of floats" << endl
-		<< "3. create array of chars" << endl;
-	int var1;
-	cin >> var1;
-	switch (var1)
-	{
-	case 1:
-	{
-		Test<int> obj;
-		obj.fill();
-		cout << "test min() function: " << endl;
-		obj.show();
-		cout << "\nenter indexes of samples you wanna compare: ";
-		int i_1;
-		int i_2;
-		cin >> i_1 >> i_2;
-		cout << "checking if object with index " << i_1 << " is greater than with " << i_2 << endl;
-		assert(obj.get(i_1) != obj.get(i_2));
-		cout << "they are not equal" << endl;
-		assert(obj.get(i_1) > obj.get(i_2), "object with index " << i_1 << " is less");
-		cout << "object with index " << i_1 << " is greater" << endl;
-		break;
-	}
-	case 2:
-	{
-		Test<float> obj;
-		obj.fill();
-		cout << "test min() function: " << endl;
-		obj.show();
-		cout << "\nenter indexes of samples you wanna compare: ";
-		int j_1;
-		int j_2;
-		cin >> j_1 >> j_2;
-		cout << "checking if object with index " << j_1 << " is greater than with " << j_2 << endl;
-		assert(obj.get(j_1) != obj.get(j_2));
-		cout << "they are not equal" << endl;
-		assert(obj.get(j_1) > obj.get(j_2), "object with index " << i_1 << " is less");
-		cout << "object with index " << j_1 << " is greater" << endl;
-		break;
-	}
-	case 3:
-	{
-		Test<string> obj;
-		obj.fill();
-		cout << "test min() function: " << endl;
-		obj.show();
-		cout << "\nenter indexes of samples you wanna compare: ";
-		int k_1;
-		int k_2;
-		cin >> k_1 >> k_2;
-		cout << "checking if object with index " << k_1 << " is greater than with " << k_2 << endl;
-		assert(obj.get(k_1) != obj.get(k_2));
-		cout << "they are not equal" << endl;
-		assert(obj.get(k_1) > obj.get(k_2), "object with index " << k_1 << " is less");
-		cout << "object with index " << k_1 << " is greater" << endl;
-		break;
+			}continue;
+		}
+		case 2:
+		{
+			bool check = true;
+			Sum<float> arr;
+			while (check) {
 
-	}
-	default:
-		break;
-	}
+				query();
+				int choose1;
+				cin >> choose1;
+				switch (choose1)
+				{
+				case 1: {
+					cout << "Enter float you wanna push: ";
+					float it2;
+					cin >> it2;
+					arr.push_back(it2);
+					continue;
+				}
+				case 2:
+				{
+					arr.show();
+					continue;
+				}
+				case 3:
+				{
+					float wanted;
+					cout << "Enter waiting result: ";
+					cin >> wanted;
+					assert(wanted == arr.sum());
+					cout << "Res: " << arr.sum() << endl;
+					continue;
+				}
+				case 4:
+				{
+					check = false;
+				}
+				default:
+					break;
+				}
+			}
+			continue;
+		}
+		case 3:
+		{
+			bool check = true;
+			Sum<double> arr;
+			while (check) {
 
-	
-	
+				query();
+				int choose1;
+				cin >> choose1;
+				switch (choose1)
+				{
+				case 1: {
+					cout << "Enter int you wanna push: ";
+					double it3;
+					cin >> it3;
+					arr.push_back(it3);
+					continue;
+				}
+				case 2:
+				{
+					arr.show();
+					continue;
+				}
+				case 3:
+				{
+					double wanted;
+					cout << "Enter waiting result: ";
+					cin >> wanted;
+					assert(wanted == arr.sum());
+					cout << "Res: " << arr.sum() << endl;
+					continue;
+				}
+				case 4:
+				{
+					check = false;
+				}
+				default:
+					break;
+				}
+			}
+			continue;
+		}
+		case 4:
+		{
+			check = false;
+		}
+		default:
+			break;
+		}
+	}
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
