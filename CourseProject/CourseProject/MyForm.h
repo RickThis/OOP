@@ -49,7 +49,7 @@ namespace Course {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
-
+	
 
 	protected:
 
@@ -90,11 +90,10 @@ namespace Course {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(164, 68);
+			this->label2->Location = System::Drawing::Point(148, 68);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(16, 17);
+			this->label2->Size = System::Drawing::Size(0, 17);
 			this->label2->TabIndex = 1;
-			this->label2->Text = L"a";
 			// 
 			// textBox1
 			// 
@@ -102,7 +101,6 @@ namespace Course {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(154, 22);
 			this->textBox1->TabIndex = 2;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
 			// textBox2
 			// 
@@ -121,20 +119,18 @@ namespace Course {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(164, 113);
+			this->label3->Location = System::Drawing::Point(148, 113);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(16, 17);
+			this->label3->Size = System::Drawing::Size(0, 17);
 			this->label3->TabIndex = 5;
-			this->label3->Text = L"b";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(164, 158);
+			this->label4->Location = System::Drawing::Point(148, 158);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(15, 17);
+			this->label4->Size = System::Drawing::Size(0, 17);
 			this->label4->TabIndex = 6;
-			this->label4->Text = L"c";
 			// 
 			// button1
 			// 
@@ -181,13 +177,11 @@ namespace Course {
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-			
+
 		}
 #pragma endregion
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
 	
 };
-public ref class Hello: MyForm{};
 }

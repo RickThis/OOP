@@ -34,9 +34,24 @@ public:
 	Prop();
 	Prop(const Prop& other);
 
-	void operator = (const Prop& other);
-	Prop operator +(const Prop& other);
-	bool operator ==(const Prop& other);
+	void operator=(const Prop& other) {
+		this->amount = other.amount;
+		this->name = other.name;
+		this->sq = other.sq;
+		this->kindof = other.kindof;
+	};
+	friend Prop operator +(const Prop&another, const Prop& other) {
+		Prop* a = new Prop(another.name + other.name, another.kindof + other.kindof, another.sq + other.sq, another.amount + other.amount);
+		return *a;
+	};
+	friend bool operator ==(const Prop& other,const Prop&another) {
+		if (another.name == other.name && another.kindof == other.kindof && another.sq == other.sq && another.amount == other.amount) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	};
 	
 
 
@@ -72,24 +87,9 @@ Prop::Prop(const Prop &other) {
 	this->name = other.name;
 	this->kindof = other.kindof;
 }
-bool Prop::operator==(const Prop&other) {
-	if (this->name == other.name && this->kindof == other.kindof && this->sq == other.sq && this->amount == other.amount) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-void Prop::operator=(const Prop&other) {
-	this->amount = other.amount;
-	this->sq = other.sq;
-	this->name = other.name;
-	this->kindof = other.kindof;
-}
-Prop Prop::operator+(const Prop& other) {
-	Prop* a = new Prop(this->name + other.name, this->kindof + other.kindof, this->sq + other.sq, this->amount + other.amount);
-	return *a;
-}
+
+
+
 void Prop::set(string n, string k, int s, int a) {
 	this->name = n;
 	this->kindof = k;
