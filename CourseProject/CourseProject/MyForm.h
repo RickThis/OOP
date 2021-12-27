@@ -49,6 +49,8 @@ namespace Course {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
+
+
 	
 
 	protected:
@@ -145,7 +147,7 @@ namespace Course {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(51, 285);
+			this->label5->Location = System::Drawing::Point(102, 266);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(0, 17);
 			this->label5->TabIndex = 8;
@@ -153,7 +155,7 @@ namespace Course {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(51, 315);
+			this->label6->Location = System::Drawing::Point(102, 295);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(0, 17);
 			this->label6->TabIndex = 9;

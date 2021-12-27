@@ -1,0 +1,3 @@
+C:\Users\Jlamt\source\repos\oop\CourseProject\CourseProject\Debug\CourseProject.vcxproj.AssemblyReference.cache
+C:\Users\Jlamt\source\repos\oop\CourseProject\CourseProject\Debug\CourseProject.MyForm.resources
+C:\Users\Jlamt\source\repos\oop\CourseProject\CourseProject\Debug\CourseProject.vcxproj.GenerateResource.cache
