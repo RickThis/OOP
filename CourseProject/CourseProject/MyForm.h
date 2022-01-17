@@ -49,6 +49,7 @@ namespace Course {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::Button^ button2;
 
 
 	
@@ -78,6 +79,7 @@ namespace Course {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -138,7 +140,7 @@ namespace Course {
 			// 
 			this->button1->Location = System::Drawing::Point(100, 228);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(153, 25);
+			this->button1->Size = System::Drawing::Size(154, 25);
 			this->button1->TabIndex = 7;
 			this->button1->Text = L"Solution";
 			this->button1->UseVisualStyleBackColor = true;
@@ -160,11 +162,22 @@ namespace Course {
 			this->label6->Size = System::Drawing::Size(0, 17);
 			this->label6->TabIndex = 9;
 			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(100, 42);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(154, 23);
+			this->button2->TabIndex = 10;
+			this->button2->Text = L"Read from a file";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(350, 372);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->button1);
@@ -185,5 +198,6 @@ namespace Course {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e);
 	
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
